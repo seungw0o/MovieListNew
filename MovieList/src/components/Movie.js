@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const movie = styled.div`
+const Movie = styled.div`
   background-color: white;
   margin-bottom: 70px;
   font-weight: 300;
@@ -18,7 +18,7 @@ const movie = styled.div`
     0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
 `;
 
-const movieImg = styled.img`
+const MovieImg = styled.img`
   position: relative;
   top: -50px;
   max-width: 150px;
@@ -28,26 +28,10 @@ const movieImg = styled.img`
     0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
 `;
 
-function Movie({ id, coverImg, title, year, summary, genres }) {
-  <div className={styles.movie}>
-    <img src={coverImg} alt={title} className={styles.movie__img} />
-    <div>
-      <h2 className={styles.movie__title}>
-        <Link to={`/movie/${id}`}>{title}</Link>
-      </h2>
-      <h3 className={styles.movie__year}>{year}</h3>
-      <p>{summary.length > 235 ? `${summary.slice(0, 235)}...` : summary}</p>
-      <ul className={styles.movie__genres}>
-        {genres.map(g => (
-          <li key={g}>{g}</li>
-        ))}
-      </ul>
-    </div>
-  </div>;
-
-  // <movie>
-  //   <h1>hello</h1>
-  // </movie>;
+function MovieScreen({ id, coverImg, title, year, summary, genres }) {
+  <Movie>
+    <h1>hello</h1>
+  </Movie>;
 }
 
 Movie.propTypes = {
@@ -58,4 +42,4 @@ Movie.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default Movie;
+export default MovieScreen;

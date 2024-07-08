@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Movie from "../components/Movie";
+import MovieScreen from "../components/Movie";
 
 const Load = styled.div`
   width: 100%;
@@ -45,17 +45,18 @@ function Home() {
           <span>Loading...</span>
         ) : (
           <MovieBox>
-            {movies.map(movie => (
-              <Movie
-                key={movie.id}
-                id={movie.id}
-                year={movie.year}
-                coverImg={movie.medium_cover_image}
-                title={movie.title}
-                summary={movie.summary}
-                genres={movie.genres}
-              />
-            ))}
+            {movies &&
+              movies.map(movie => (
+                <MovieScreen
+                  key={movie.id}
+                  id={movie.id}
+                  year={movie.year}
+                  coverImg={movie.medium_cover_image}
+                  title={movie.title}
+                  summary={movie.summary}
+                  genres={movie.genres}
+                />
+              ))}
           </MovieBox>
         )}
       </Load>
