@@ -30,7 +30,7 @@ const MovieImg = styled.img`
 
 function MovieScreen({ id, coverImg, title, year, summary, genres }) {
   <Movie>
-    <h1>hello</h1>
+    <h1>hellofsafs</h1>
   </Movie>;
 }
 

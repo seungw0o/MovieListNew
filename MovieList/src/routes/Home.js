@@ -26,16 +26,22 @@ const Container = styled.div`
 `;
 
 function Home() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
-  const getMovies = async () => {
-    const response = await axios.get(
-      "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.5&sort_by=year"
-    );
-    setMovies(response.data.movies);
-    setLoading(false);
-  };
+
   useEffect(() => {
+    const getMovies = async () => {
+      try {
+        setMovies([]);
+        setLoading(true);
+        const response = await axios.get(
+          "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.5&sort_by=year"
+        );
+        setMovies(response.data.movies);
+      } finally {
+        setLoading(false);
+      }
+    };
     getMovies();
   }, []);
   return (
