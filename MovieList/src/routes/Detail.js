@@ -20,6 +20,18 @@ const Load = styled.div`
   align-items: center;
   font-weight: 300;
 `;
+const MovieImg = styled.img`
+  top: -50px;
+  margin: 10px 10px 10px 80px;
+  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+`;
+
+const MovieTitle = styled.h2`
+  margin: 10px 10px 10px 80px;
+  font-weight: 300;
+  text-decoration: none;
+`;
 
 function Detail({ title, large_cover_image }) {
   const navigate = useNavigate();
@@ -44,15 +56,19 @@ function Detail({ title, large_cover_image }) {
   };
   return (
     <div>
-      <HomeBtn onClick={goHome}>Go Home</HomeBtn>
+      <div>
+        <HomeBtn onClick={goHome}>Go Home</HomeBtn>
+      </div>
       {loading ? (
         <Load>
           <span>Loading...</span>
         </Load>
       ) : (
-        <h1>hi</h1>
+        <div>
+          <MovieTitle>{details.title}</MovieTitle>
+          <MovieImg src={details.medium_cover_image}></MovieImg>
+        </div>
       )}
-      ;
     </div>
   );
 }
