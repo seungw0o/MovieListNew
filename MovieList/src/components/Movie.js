@@ -16,7 +16,10 @@ const Movie = styled.div`
   color: inherit;
   box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
     0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
-  height: fit-content;
+`;
+
+const MovieSummary = styled.p`
+  float: right;
 `;
 
 const MovieImg = styled.img`
@@ -47,7 +50,6 @@ const MovieYear = styled.h3`
   margin-right: 10px;
   font-size: 14px;
 `;
-const MovieSummary = styled.p``;
 const MovieGenres = styled.ul`
   list-style: none;
   padding: 0;
@@ -65,10 +67,10 @@ function MovieScreen({ id, coverimg, title, year, summary, genres }) {
   return (
     <Movie>
       <MovieImg src={coverimg} alt={title}></MovieImg>
-      <MovieTitle>{title}</MovieTitle>
       <div>
+        <MovieTitle>{title}</MovieTitle>
         <MovieYear>{year}</MovieYear>
-        <MovieSummary>{summary}</MovieSummary>
+        <p>{summary.length > 235 ? `${summary.slice(0, 200)}...` : summary}</p>
         <MovieGenres>
           {genres.map(g => (
             <li key={g}>{g}</li>
