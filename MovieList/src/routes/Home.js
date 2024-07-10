@@ -1,7 +1,8 @@
-import React, { useState, useEffect, Component } from "react";
+import { useState, useEffect, Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import MovieScreen from "../components/Movie";
+import Detail from "./Detail";
 
 const Load = styled.div`
   width: 100%;
@@ -18,6 +19,9 @@ const MovieBox = styled.div`
   padding: 50px;
   width: 80%;
   padding-top: 70px;
+  @media screen and (max-width: 1090px) {
+    grid-template-columns: 1fr;
+  }
 `;
 const Container = styled.div`
   height: 100%;
@@ -26,46 +30,45 @@ const Container = styled.div`
 `;
 
 function Home() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
+  const getMovies = async () => {
+    const response = await axios.get(
+      "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.5&sort_by=year"
+    );
+    setMovies(response.data.data.movies);
 
+    setLoading(false);
+  };
   useEffect(() => {
-    const getMovies = async () => {
-      try {
-        setMovies([]);
-        setLoading(true);
-        const response = await axios.get(
-          "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.5&sort_by=year"
-        );
-        setMovies(response.data.movies);
-      } finally {
-        setLoading(false);
-      }
-    };
     getMovies();
   }, []);
+
   return (
     <Container>
-      <Load>
-        {loading ? (
+      {loading ? (
+        <Load>
           <span>Loading...</span>
-        ) : (
-          <MovieBox>
-            {movies &&
-              movies.map(movie => (
+        </Load>
+      ) : (
+        <MovieBox>
+          {movies?.map(movie => {
+            return (
+              <div>
                 <MovieScreen
                   key={movie.id}
                   id={movie.id}
                   year={movie.year}
-                  coverImg={movie.medium_cover_image}
+                  coverimg={movie.medium_cover_image}
                   title={movie.title}
                   summary={movie.summary}
                   genres={movie.genres}
                 />
-              ))}
-          </MovieBox>
-        )}
-      </Load>
+              </div>
+            );
+          })}
+        </MovieBox>
+      )}
     </Container>
   );
 }

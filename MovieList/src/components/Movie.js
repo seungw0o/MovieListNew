@@ -68,7 +68,9 @@ function MovieScreen({ id, coverimg, title, year, summary, genres }) {
     <Movie>
       <MovieImg src={coverimg} alt={title}></MovieImg>
       <div>
-        <MovieTitle>{title}</MovieTitle>
+        <MovieTitle>
+          <Link to={`/movie/${id}`}>{title}</Link>
+        </MovieTitle>
         <MovieYear>{year}</MovieYear>
         <p>{summary.length > 235 ? `${summary.slice(0, 200)}...` : summary}</p>
         <MovieGenres>
